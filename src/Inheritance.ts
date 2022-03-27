@@ -16,6 +16,21 @@ export class Person {
     readonly _name: string;
     readonly _secondName: string;
     readonly _age: number;
+
+    constructor(data: IPersonData) {
+        const { name, secondName, age } = data;
+        this._name = name;
+        this._secondName = secondName;
+        this._age = age;
+    }
+
+    getData(): IPersonData {
+        return {
+            name: this._name,
+            secondName: this._secondName,
+            age: this._age,
+        };
+    }
 }
 
 /*
@@ -24,4 +39,17 @@ export class Person {
  */
 export class Student extends Person {
     readonly _phone: string;
+
+    constructor(data: IStudentData) {
+        const { phone, ...person } = data;
+        super(person);
+        this._phone = phone;
+    }
+
+    getData(): IStudentData {
+        return {
+            ...super.getData(),
+            phone: this._phone,
+        };
+    }
 }
